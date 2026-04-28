@@ -2,13 +2,23 @@
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Scanner;
 
 public class AppCaracter {
 
     public static void main(String[] args) throws Exception {
 
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Vamos a codificar un texto. ¿Que archivo te gustaria codificar? (Debe estar dentro de src/ficheros)");
+        String archivo= sc.nextLine();
+        File ficheroEntrada= new File("src/ficheros/" + archivo);
+
+        System.out.println("Introduzca el desplazamiento, desde -25 a 25: ");
+        int desplazamiento= sc.nextInt();
+        sc.nextLine();
+
         // Declaramos el objeto de tipo File que referencia al fichero de entrada
-        File ficheroEntrada = new File("entrada.txt");
+
 
         // Declaramos el objeto de tipo File que referencia al fichero de entrada
         File ficheroSalida = new File("salidaCaracter.txt");
@@ -28,13 +38,13 @@ public class AppCaracter {
         // Cuando se alcanza EOF (End Of File), se deja de leer
         while ((caracterInt = lector.read()) != -1) {
             // Convertimos el carácter en formato int a char para poder trabajar con el
+            if(caracterInt >= 33) {
+                caracterInt= caracterInt + desplazamiento;
+            }
             char caracter = (char) caracterInt;
 
-            // Convertimos el caracter a mayuscula
-            char mayuscula = Character.toUpperCase(caracter);
-
-            // Mostramos por pantalla
-            System.out.print(mayuscula);
+            // Mostramos por pantalla el caracter procesado
+            System.out.println(caracter);
 
             /*
                  * Escribimos en el fichero de salida.
@@ -42,7 +52,7 @@ public class AppCaracter {
                  * contenido del fichero en un String, ya que desconocemos
                  * su tamaño (puede ser de mucho tamaño)
              */
-            escritor.write(mayuscula);
+            escritor.write(caracter);
         }
 
         // Cerramos los archivos
