@@ -13,15 +13,23 @@ public class AppCaracter {
         String archivo= sc.nextLine();
         File ficheroEntrada= new File("src/ficheros/" + archivo);
 
+        do { 
+            if(!ficheroEntrada.exists()) {
+                System.out.println("Este fichero no es válido, vuelva a intentarlo: ");
+                archivo= sc.nextLine();
+                ficheroEntrada = new File("src/ficheros/" + archivo);
+            }
+            
+        } while (!ficheroEntrada.exists());
+
         System.out.println("Introduzca el desplazamiento, desde -25 a 25: ");
         int desplazamiento= sc.nextInt();
         sc.nextLine();
 
-        // Declaramos el objeto de tipo File que referencia al fichero de entrada
 
-
-        // Declaramos el objeto de tipo File que referencia al fichero de entrada
-        File ficheroSalida = new File("salidaCaracter.txt");
+        System.out.println("Introduce la ruta absoluta para el archivo de salida");
+        String rutaSalida= sc.nextLine();
+        File ficheroSalida = new File(rutaSalida);
 
         // Abrimos el archivo para leerlo
         // ALTERNATIVA: FileReader lector = new FileReader("entrada.txt");
