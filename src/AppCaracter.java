@@ -13,6 +13,7 @@ public class AppCaracter {
         String archivo= sc.nextLine();
         File ficheroEntrada= new File("src/ficheros/" + archivo);
 
+        //Bucle que se repite si el fichero no es válido al ya existir
         do { 
             if(!ficheroEntrada.exists()) {
                 System.out.println("Este fichero no es válido, vuelva a intentarlo: ");
@@ -21,10 +22,12 @@ public class AppCaracter {
             }            
         } while (!ficheroEntrada.exists());
 
+        // El usuario introduce el nº de desplazamiento
         System.out.println("Introduzca el nº de desplazamiento, desde -25 a 25: ");
         int desplazamiento= sc.nextInt();
         sc.nextLine();
 
+        //Condicional para limitar el rango de desplazamiento, se verifica si es valido
         if(desplazamiento>= -25 && desplazamiento<=25) {
             System.out.println("Preparando archivo...");
         } else {
@@ -33,11 +36,12 @@ public class AppCaracter {
             System.out.println("ERROR, el nº de desplazamiento debe estar entre -25 y 25.");
         }
 
-
+        //El usuario introduce ruta absoluta donde se obtendra el archivo codificado
         System.out.println("Introduce la ruta absoluta para el archivo de salida");
         String rutaSalida= sc.nextLine();
         File ficheroSalida = new File(rutaSalida);
 
+        //Bucle que se repite si el fichero ya existe
         do {
             if (ficheroSalida.exists()) {
                 System.out.println("ERROR, este archivo ya existe. Introduzca otra ruta absoluta: ");
@@ -46,6 +50,8 @@ public class AppCaracter {
             }
         } while (ficheroSalida.exists());
 
+        //Se abre y se lee el fichero de entrada
+        //Se abre y se escribe en el fichero de salida
         FileReader lector = new FileReader(ficheroEntrada);
         FileWriter escritor = new FileWriter(ficheroSalida);
 
